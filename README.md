@@ -24,8 +24,6 @@ Post Order -
                         "price": 125.01,
                         "quantity": 15
                     }
-                    
-                
                 ]
         }'      
         
