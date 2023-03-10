@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Order struct {
 	gorm.Model
-	Id int `gorm:"PRIMARY_KEY" json:"id" `
+	Id int `gorm:"PRIMARY_KEY uniqueIndex" json:"id" `
 	// Base
 	Status string    `json:"status"`
 	Item   []AllItem `gorm:"foreignkey:OrderID;references:Id" json:"items"`
