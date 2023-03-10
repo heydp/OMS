@@ -1,11 +1,15 @@
 # OMS
 
-Use Server -  postgres
-Use DB - ordertry
-port - 5432
+Use Server -  postgres                  
+
+Use DB - ordertry           
+
+port - 5432     
 
 
-To run the program - go run main.go
+
+To run the program - go run main.go     
+
 
 Post Order - 
     curl --location 'http://localhost:8080/orders' \
@@ -23,7 +27,8 @@ Post Order -
                     
                 
                 ]
-        }'
+        }'      
+        
 
 Update Order - 
     curl --location --request PATCH 'http://localhost:8080/order/{order_id}' \
@@ -40,9 +45,11 @@ Update Order -
             }
         ]
     }'
-
+        
+        
 Get All Orders - 
-    GET 'http://localhost:8080/orders' 
+    GET 'http://localhost:8080/orders'          
+    
 
 Get Order By ID - 
     GET http://localhost:8080/order/{id}
