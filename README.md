@@ -46,8 +46,19 @@ Update Order -
         
         
 Get All Orders - 
-    GET 'http://localhost:8080/orders'          
+    GET 'http://localhost:8080/orders'                
     
 
 Get Order By ID - 
-    GET http://localhost:8080/order/{id}
+    GET 'http://localhost:8080/orderById/{id}'              
+
+Get Order By Status - 
+    GET 'http://localhost:8080/orderByStatus/{status}'      
+
+
+Sort Orders - 
+    GET 'http://localhost:8080/orders?sortBy=id.desc'           
+    GET 'http://localhost:8080/orders?sortBy=id.asc'            
+    GET 'http://localhost:8080/orders?sortBy=status.desc'            
+    GET 'http://localhost:8080/orders?sortBy=status.asc'            
+

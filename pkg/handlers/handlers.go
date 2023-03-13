@@ -39,8 +39,8 @@ func (h Handler) GetOrdersHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(outputs)
 }
-func (h Handler) GetOrderHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("Calling GetOrderHandler func")
+func (h Handler) GetOrderHandlerbyId(w http.ResponseWriter, r *http.Request) {
+	log.Println("Calling GetOrderHandlerbyId func")
 	w.Header().Add("Content-Type", "application/json")
 
 	vars := mux.Vars(r)
@@ -74,6 +74,42 @@ func (h Handler) GetOrderHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(output)
+
+}
+func (h Handler) GetOrderHandlerbyStatus(w http.ResponseWriter, r *http.Request) {
+	log.Println("Calling GetOrderHandlerbyStatus func")
+	w.Header().Add("Content-Type", "application/json")
+
+	vars := mux.Vars(r)
+	status, _ := vars["status"]
+	// log.Println("The status is : ", status)
+	// for i, val := range mocks.Orders {
+	// 	if val.Id == intId {
+	// 		w.WriteHeader(http.StatusOK)
+	// 		json.NewEncoder(w).Encode(mocks.Orders[i])
+	// 		return
+	// 	}
+	// }
+	var order []models.Order
+	result := h.DB.Preload(clause.Associations).Find(&order, &models.Order{Status: status})
+	if result.Error != nil {
+		log.Println("The Order Status is not present")
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode("The Order Status is not present")
+		return
+	}
+	// log.Println("The array length is : ", len(order))
+
+	var outputs []dto.Order
+	for _, val := range order {
+		var output dto.Order
+		dto.Convert(&output, &val)
+		outputs = append(outputs, output)
+	}
+
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(outputs)
 
 }
 func (h Handler) UpdateOrderHandler(w http.ResponseWriter, r *http.Request) {

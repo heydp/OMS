@@ -18,8 +18,11 @@ func main() {
 	h := handlers.NewHandler(DB)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/orders", h.GetOrdersHandler).Methods(http.MethodGet)
-	r.HandleFunc("/order/{id}", h.GetOrderHandler).Methods(http.MethodGet)
+	// r.HandleFunc("/orders", h.GetOrdersHandler).Methods(http.MethodGet)
+	r.HandleFunc("/orders", h.GetAllOrders).Methods(http.MethodGet)
+	r.HandleFunc("/orderById/{id}", h.GetOrderHandlerbyId).Methods(http.MethodGet)
+
+	r.HandleFunc("/orderByStatus/{status}", h.GetOrderHandlerbyStatus).Methods(http.MethodGet)
 
 	r.HandleFunc("/orders", h.PostOrderHandler).Methods(http.MethodPost)
 	r.HandleFunc("/order/{id}", h.UpdateOrderHandler).Methods(http.MethodPatch)
