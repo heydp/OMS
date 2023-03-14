@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"reflect"
 	"strings"
@@ -14,6 +15,8 @@ import (
 )
 
 func (uh Handler) GetAllOrders(w http.ResponseWriter, r *http.Request) {
+	log.Println("Calling GetOrdersHandler func")
+
 	//var orders []models.Order
 	orders := []models.Order{}
 	// sortBy is expected to look like field.orderdirection i. e. id.asc
@@ -41,6 +44,8 @@ func (uh Handler) GetAllOrders(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Add("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(outputs); err != nil {
+		// if err := json.NewEncoder(w).Encode(orders); err != nil {
+
 		fmt.Println(err)
 		http.Error(w, "Error encoding response object", http.StatusInternalServerError)
 	}

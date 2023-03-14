@@ -1,20 +1,19 @@
 package models
 
-import "gorm.io/gorm"
-
 type Order struct {
-	gorm.Model
+	// gorm.Model
+	// Base `json:"-"`
 	Id int `gorm:"PRIMARY_KEY uniqueIndex" json:"id" `
-	// Base
+
 	Status string    `json:"status"`
 	Item   []AllItem `gorm:"foreignkey:OrderID;references:Id" json:"items"`
 }
 
 type AllItem struct {
-	gorm.Model
-	Id int `gorm:"PRIMARY_KEY" json:"item_id"`
-	// OrderId     int     `gorm:"column:order_id" json: "order_id"`
-	// Base
+	// gorm.Model
+	// ItemBase `json:"-"`
+	Id int ` gorm:"PRIMARY_KEY" sql:"AUTO_INCREMENT" json:"item_id"`
+
 	Description string  `json:"description"`
 	Price       float64 `json:"price"`
 	Quantity    int     `json:"quantity"`
